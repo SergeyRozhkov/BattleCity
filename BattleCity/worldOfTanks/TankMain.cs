@@ -11,20 +11,18 @@ namespace BattleCity.worldOfTanks
     public class TankMain
     {
         const int Step = 5;
-        Point location;
+        private Point location;
         static string pathImage = Application.StartupPath + @"\image\TankMain";
-        // словарь соотвествия направление - картинка
         Dictionary<TankDirection, Image> dictDirection;
-
-        // свойсво напраление объекта
         public TankDirection Direction { get; private set; }
         public Point Location { get { return location; } set { location = value; } }
 
-        // функциональное свойство, выдает текущее фото
         public Image GetImage 
         {
             get { return dictDirection[Direction]; }
         }
+
+        public Point Location1 { get => location; set => location = value; }
 
         public TankMain()
         {
