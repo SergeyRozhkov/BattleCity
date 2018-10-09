@@ -57,7 +57,7 @@
     <Compile Include="worldOfTanks\TankDirectionEnum.cs" />
     <Compile Include="worldOfTanks\TankEnemy.cs" />
     <Compile Include="worldOfTanks\TankMain.cs" />
-    <Compile Include="worldOfTanks\Wall.cs" />
+    <Compile Include="worldOfTanks\IWall.cs" />
     <EmbeddedResource Include="FormGame.resx">
       <DependentUpon>FormGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,10 +85,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="image\TankMain\TankDown.jpg" />
+    <Content Include="image\TankMain\TankDown.png" />
     <Content Include="image\TankMain\TankLeft.jpg" />
+    <Content Include="image\TankMain\TankLeft.png" />
     <Content Include="image\TankMain\TankRight.jpg" />
+    <Content Include="image\TankMain\TankRight.png" />
     <Content Include="image\TankMain\TankUp.jpg" />
+    <Content Include="image\TankMain\TankUp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

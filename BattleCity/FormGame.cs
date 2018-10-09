@@ -13,34 +13,31 @@ namespace BattleCity
 {
     public partial class FormGame : Form
     {
-        
-        PictureBox BoxForTank;
-        TankMain tank; 
+        public Map Map { get; set; }
+        PictureBox BoxTankMain;
 
-        public FormGame(TankMain tankMain)
+        public FormGame(Map map)
         {
-            StartPosition = FormStartPosition.CenterScreen;
-            tank = tankMain;
-            BoxForTank = new PictureBox
-            {
-                Size = tank.GetImage.Size,
-                Image = tank.GetImage,
-                Parent = this,
-                // почему-то форм больше своих размеров, чем появляется при запуске
-                Location = tank.Location
-            };
-            // теперь это работает. Заебись.
-            KeyDown += (sender, args) => {
-                tank.InputKeybord(sender, args);
-                BoxForTank.Image = tank.GetImage;
-                BoxForTank.Location = tank.Location;
-            };
-
+            InitializeComponent();
+            Map = map;
+            Create();
         }
-
-        private void FormGame_Load(object sender, EventArgs e)
+        void Create()
         {
-
+            BackColor = Color.Black;
+            ClientSize = Map.Size;
+            BoxTankMain = new PictureBox
+            {
+                Size = Map.Tank.Size,
+                Image = Map.Tank.GetImage,
+                Parent = this,
+                Location = Map.Tank.Location
+            };
+            KeyDown += (sender, args) => {
+                Map.Tank.Control(sender, args);
+                BoxTankMain.Image = Map.Tank.GetImage;
+                BoxTankMain.Location = Map.Tank.Location;
+            };
         }
     }
 }

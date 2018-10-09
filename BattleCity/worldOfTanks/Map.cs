@@ -9,16 +9,25 @@ using System.Drawing;
 namespace BattleCity.worldOfTanks
 {
     
-    class Map
+    public class Map
     {
-        public Size Size { get; private set; }
+        public static Size Size { get; private set; }
         public TankMain Tank { get; private set; }
         public List<TankEnemy> tankEmenies;
-        public List<Wall> wall;
-
-        public Map(Size size)
+        public List<IWall> wall;
+        public Map()
+        {
+            Size = new Size(600, 400);
+            Tank = new TankMain();
+        }
+        public Map(Size size) : base()
         {
             Size = size;
+        }
+        // управление игровым проецессом
+        public void Control(object sender, KeyEventArgs args)
+        {
+            Tank.Control(sender, args);
         }
     }
 }
