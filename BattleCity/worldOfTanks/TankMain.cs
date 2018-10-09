@@ -10,14 +10,15 @@ namespace BattleCity.worldOfTanks
 {
     public class TankMain
     {
-        // СДЕЛАЙ ПО СВОЕМУ ПУТЬ, ИБО Я НЕ ХОТЕЛ СИЛЬНО ЗАЦИКЛИВАТЬСЯ С МЕТОДОМ, КОТОРЫЙ ВЫТАСКИВАЕТ ПУТЬ ДО ПРОЕКТА.)))
-        static string pathImage = @"C:\Users\litotes\source\repos\BattleCity\BattleCity\image\TankMain\";
+        const int Step = 5;
+        Point location;
+        static string pathImage = Application.StartupPath + @"\image\TankMain";
         // словарь соотвествия направление - картинка
         Dictionary<TankDirection, Image> dictDirection;
 
         // свойсво напраление объекта
         public TankDirection Direction { get; private set; }
-        public bool Life { get; }
+        public Point Location { get { return location; } set { location = value; } }
 
         // функциональное свойство, выдает текущее фото
         public Image GetImage 
@@ -28,13 +29,13 @@ namespace BattleCity.worldOfTanks
         public TankMain()
         {
             Direction = TankDirection.Up;
-            Life = true;
+            location = new Point(0, 0);
             dictDirection = new Dictionary<TankDirection, Image>
             {
-                [TankDirection.Up] = Image.FromFile(pathImage + @"TankUp.jpg"),
-                [TankDirection.Right] = Image.FromFile(pathImage + @"TankRight.jpg"),
-                [TankDirection.Down] = Image.FromFile(pathImage + @"TankDown.jpg"),
-                [TankDirection.Left] = Image.FromFile(pathImage + @"TankLeft.jpg")
+                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankUp.jpg"),
+                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankRight.jpg"),
+                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankDown.jpg"),
+                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.jpg")
             };
         }
         // меняет картинку в соотвествие клавиши
@@ -42,6 +43,25 @@ namespace BattleCity.worldOfTanks
         {
             if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
             Direction = (TankDirection)args.KeyValue; // преобразовываем цифру в перечисление и записывает в Direction
+            Move((TankDirection)args.KeyValue);
+        }
+        public void Move(TankDirection direction)
+        {
+            switch (direction)
+            {
+                case TankDirection.Left:
+                    location.X -= Step;
+                    break;
+                case TankDirection.Up:
+                    location.Y -= Step;
+                    break;
+                case TankDirection.Right:
+                    location.X += Step;
+                    break;
+                case TankDirection.Down:
+                    location.Y += Step;
+                    break;
+            }
         }
     }
 }
