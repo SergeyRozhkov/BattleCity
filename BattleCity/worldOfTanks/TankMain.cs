@@ -8,9 +8,6 @@ using System.Windows.Forms;
 
 namespace BattleCity.worldOfTanks
 {
-	/// <summary>
-	/// РУУПКА
-	/// </summary>
     public class TankMain
     {
         const int Step = 5;
