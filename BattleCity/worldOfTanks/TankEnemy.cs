@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleCity.worldOfTanks
 {
-    class TankEnemy
+    public class TankEnemy
     {
 
     }
