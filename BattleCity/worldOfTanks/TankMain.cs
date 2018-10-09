@@ -32,10 +32,10 @@ namespace BattleCity.worldOfTanks
             location = new Point(0, 0);
             dictDirection = new Dictionary<TankDirection, Image>
             {
-                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankUp.jpg"),
-                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankRight.jpg"),
-                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankDown.jpg"),
-                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.jpg")
+                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankUp.png"),
+                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankRight.png"),
+                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankDown.png"),
+                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.png")
             };
         }
         // меняет картинку в соотвествие клавиши
