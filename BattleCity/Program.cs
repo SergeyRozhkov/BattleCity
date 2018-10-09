@@ -15,11 +15,11 @@ namespace BattleCity
         [STAThread]
         static void Main()
         {
-            var tank = new TankMain();
+            var map = new Map();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormGame(tank)); // передаем объекта танка в загрузку формы
+            Application.Run(new FormGame(map)); // передаем объекта танка в загрузку формы
         }
     }
 }

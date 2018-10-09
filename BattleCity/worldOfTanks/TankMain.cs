@@ -11,15 +11,15 @@ namespace BattleCity.worldOfTanks
     public class TankMain
     {
         const int Step = 5;
-        private Point location;
         static string pathImage = Application.StartupPath + @"\image\TankMain";
-        Dictionary<TankDirection, Image> dictDirection;
-        public TankDirection Direction { get; private set; }
-        public Point Location { get { return location; } set { location = value; } }
 
-        public Image GetImage 
-        {
-            get { return dictDirection[Direction]; }
+        private Point location;
+        Dictionary<TankDirection, Image> dictDirection;
+
+        public TankDirection Direction { get; private set; }
+        public Size Size { get; private set; }
+        public Point Location { get { return location; } set { location = value; } }
+        public Image GetImage { get { return dictDirection[Direction]; }
         }
 
         public Point Location1 { get => location; set => location = value; }
@@ -28,6 +28,7 @@ namespace BattleCity.worldOfTanks
         {
             Direction = TankDirection.Up;
             location = new Point(0, 0);
+            Size = new Size(50, 50);
             dictDirection = new Dictionary<TankDirection, Image>
             {
                 [TankDirection.Up] = Image.FromFile(pathImage + @"\TankUp.png"),
@@ -36,30 +37,47 @@ namespace BattleCity.worldOfTanks
                 [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.png")
             };
         }
-        // меняет картинку в соотвествие клавиши
-        public void InputKeybord(object sender, KeyEventArgs args)
+        public void Control(object sender, KeyEventArgs args)
         {
             if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
             Direction = (TankDirection)args.KeyValue; // преобразовываем цифру в перечисление и записывает в Direction
             Move((TankDirection)args.KeyValue);
         }
-        public void Move(TankDirection direction)
+        void Move(TankDirection direction)
+        {
+            if (CheckWay(direction))
+            {
+                switch (direction)
+                {
+                    case TankDirection.Left:
+                        location.X -= Step;
+                        break;
+                    case TankDirection.Up:
+                        location.Y -= Step;
+                        break;
+                    case TankDirection.Right:
+                        location.X += Step;
+                        break;
+                    case TankDirection.Down:
+                        location.Y += Step;
+                        break;
+                }
+            }
+        }
+        bool CheckWay(TankDirection direction)
         {
             switch (direction)
             {
                 case TankDirection.Left:
-                    location.X -= Step;
-                    break;
+                    return (location.X - Step >= 0) ? true : false;
                 case TankDirection.Up:
-                    location.Y -= Step;
-                    break;
+                    return (location.Y - Step >= 0) ? true : false;
                 case TankDirection.Right:
-                    location.X += Step;
-                    break;
+                    return (location.X + Step <= Map.Size.Width - Size.Width) ? true : false;
                 case TankDirection.Down:
-                    location.Y += Step;
-                    break;
+                    return (location.Y + Step <= Map.Size.Height - Size.Height) ? true : false;
             }
+            throw new ArgumentException();
         }
     }
 }
