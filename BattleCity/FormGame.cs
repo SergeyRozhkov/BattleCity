@@ -22,16 +22,17 @@ namespace BattleCity
             Map = map;
             Create();
         }
+
         void Create()
         {
             BackColor = Color.Black;
             ClientSize = Map.Size;
-            BoxTankMain = new PictureBox
-            {
-                Size = Map.Tank.Size,
-                Image = Map.Tank.GetImage,
-                Parent = this,
-                Location = Map.Tank.Location
+			BoxTankMain = new PictureBox
+			{
+				Size = Map.Tank.Size,
+				Image = Map.Tank.GetImage,
+				Location = Map.Tank.Location,
+				Parent = this
             };
             KeyDown += (sender, args) => {
                 Map.Tank.Control(sender, args);
