@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace BattleCity.worldOfTanks
 {
-	class WallBrick
+	class WallBrick : IWall
 	{
-		public Size size { get; private set; }
-		public Point location;
+		public Size Size { get; set; }
+		public Point Location { get; set; }
 		public WallBrick(Point location)
 		{
-			this.location = location;
-			size = new Size(50, 50);
+			this.Location = location;
+			Size = new Size(50, 50);
 		}
 		public Image Image = Image.FromFile(Application.StartupPath + @"\image\Wall\Wall.png");
 	}
