@@ -14,9 +14,10 @@ namespace BattleCity
     public partial class FormGame : Form
     {
         public Map Map { get; set; }
-        PictureBox BoxTankMain;
+		PictureBox BoxTankMain;
+		PictureBox BoxForWall;
 
-        public FormGame(Map map)
+		public FormGame(Map map)
         {
             InitializeComponent();
             Map = map;
@@ -39,6 +40,13 @@ namespace BattleCity
                 BoxTankMain.Image = Map.Tank.Image;
                 BoxTankMain.Location = Map.Tank.Location;
             };
-        }
-    }
+			BoxForWall = new PictureBox
+			{
+				Size = Map.wall[0].Size,
+				Image = Map.wall[0].Image,
+				Location = Map.wall[0].Location,
+				Parent = this
+			};
+		}
+	}
 }

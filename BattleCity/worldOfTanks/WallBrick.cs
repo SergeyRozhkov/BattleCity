@@ -12,11 +12,13 @@ namespace BattleCity.worldOfTanks
 	{
 		public Size Size { get; set; }
 		public Point Location { get; set; }
+		public Image Image { get; set; }
 		public WallBrick(Point location)
 		{
 			this.Location = location;
 			Size = new Size(50, 50);
+			Image = Image.FromFile(Application.StartupPath + @"\image\Wall\Wall.png");
 		}
-		public Image Image = Image.FromFile(Application.StartupPath + @"\image\Wall\Wall.png");
+		
 	}
 }
