@@ -20,6 +20,7 @@ namespace BattleCity.worldOfTanks
             Size = new Size(600, 400);
             Tank = new TankMain();
 			CreateWall();
+			ShowWall();
         }
         public Map(Size size) : base()
         {
@@ -31,10 +32,36 @@ namespace BattleCity.worldOfTanks
             Tank.Control(sender, args);
         }
 		// создание стен на мапе
+		// сдесь еще скорее всего будем вытягивать готовую карту и закидывать в лист
 		public void CreateWall()
 		{
-			wall.Add(new WallBrick(new Point(0, 0)));
-		}
+			wall = new List<IWall>();
+			int x = 0;
+			int y = 0;
+			for(int horizont = 13; horizont>0; horizont--, x+=50)
+				wall.Add(new WallBrick(new Point(x, y)));
 
+			for(int vertical = 7; vertical>0; vertical--, y+=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+
+			for (int horizont = 13; horizont > 0; horizont--,x-=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+
+			for (int vertical = 6; vertical > 0; vertical--,y-=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+		}
+		// создает пикче боксы и рисует по координатам с листа wall
+		public void ShowWall()
+		{
+			foreach(IWall c in wall)
+			{
+				PictureBox BoxForWall = new PictureBox
+				{
+					Size = c.Size,
+					Location = c.Location,
+					Parent = Form.ActiveForm
+				};
+			}
+		}
     }
 }
