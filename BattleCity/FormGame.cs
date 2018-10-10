@@ -30,13 +30,13 @@ namespace BattleCity
 			BoxTankMain = new PictureBox
 			{
 				Size = Map.Tank.Size,
-				Image = Map.Tank.GetImage,
+				Image = Map.Tank.Image,
 				Location = Map.Tank.Location,
 				Parent = this
             };
             KeyDown += (sender, args) => {
                 Map.Tank.Control(sender, args);
-                BoxTankMain.Image = Map.Tank.GetImage;
+                BoxTankMain.Image = Map.Tank.Image;
                 BoxTankMain.Location = Map.Tank.Location;
             };
         }

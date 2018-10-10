@@ -51,9 +51,12 @@
     <Compile Include="FormGame.Designer.cs">
       <DependentUpon>FormGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="worldOfTanks\IGameObject.cs" />
+    <Compile Include="worldOfTanks\ITank.cs" />
     <Compile Include="worldOfTanks\Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="worldOfTanks\Tank.cs" />
     <Compile Include="worldOfTanks\TankDirectionEnum.cs" />
     <Compile Include="worldOfTanks\TankEnemy.cs" />
     <Compile Include="worldOfTanks\TankMain.cs" />

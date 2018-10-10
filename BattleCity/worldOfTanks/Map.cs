@@ -12,7 +12,7 @@ namespace BattleCity.worldOfTanks
     public class Map
     {
         public static Size Size { get; private set; }
-        public TankMain Tank { get; private set; }
+        public Tank Tank { get; private set; }
         public List<TankEnemy> tankEmenies;
         public List<IWall> wall;
         public Map()
