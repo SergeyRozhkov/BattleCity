@@ -15,7 +15,8 @@ namespace BattleCity
     {
         public Map Map { get; set; }
 		PictureBox BoxTankMain;
-		PictureBox BoxForWall;
+		private PictureBox[] pictureBox = new PictureBox[100];
+		private int Counter = 20; 
 
 		public FormGame(Map map)
         {
@@ -28,24 +29,32 @@ namespace BattleCity
         {
             BackColor = Color.Black;
             ClientSize = Map.Size;
-			BoxTankMain = new PictureBox
+
+			//пикчер бокс для TankMain
+			pictureBox[0] = new PictureBox
 			{
 				Size = Map.Tank.Size,
 				Image = Map.Tank.Image,
 				Location = Map.Tank.Location,
 				Parent = this
             };
-            KeyDown += (sender, args) => {
-                Map.Tank.Control(sender, args);
-                BoxTankMain.Image = Map.Tank.Image;
-                BoxTankMain.Location = Map.Tank.Location;
-            };
-			BoxForWall = new PictureBox
+			//выдает пикчер боксы WallBrick
+			foreach (IWall wall in Map.wall)
 			{
-				Size = Map.wall[0].Size,
-				Image = Map.wall[0].Image,
-				Location = Map.wall[0].Location,
-				Parent = this
+				pictureBox[Counter] = new PictureBox
+				{
+					Size = wall.Size,
+					Image = wall.Image,
+					Location = wall.Location,
+				    Parent = this
+				};
+				Counter++;
+			}
+
+			KeyDown += (sender, args) => {
+				Map.Tank.Control(sender, args);
+				BoxTankMain.Image = Map.Tank.Image;
+				BoxTankMain.Location = Map.Tank.Location;
 			};
 		}
 	}
