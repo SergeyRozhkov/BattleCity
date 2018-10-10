@@ -25,43 +25,54 @@ namespace BattleCity.worldOfTanks
             get { return dictDirection[Direction]; }
         }
 
-        protected bool CheckWay(TankDirection direction)
+        protected bool CheckWay(TankDirection direction, List<IGameObject> gameObjects)
         {
             switch (direction)
             {
                 case TankDirection.Left:
-                    return (location.X - Step >= 0) ? true : false;
+                    var topLeft = new Point(Location.X - Step, Location.Y);
+                    var bottomLeft = new Point(Location.X - Step, Location.Y - Size.Height);
+                    foreach (var obj in gameObjects)
+                    {
+                        var top = topLeft.Y > obj.Location.Y + obj.Size.Height? true : false;
+                        var bottom = bottomLeft.Y < obj.Location.Y ? true : false;
+                        if (top || bottom)
+                        {
+
+                        }
+                    }
+                    break;
                 case TankDirection.Up:
-                    return (location.Y - Step >= 0) ? true : false;
+                    break;
                 case TankDirection.Right:
-                    return (location.X + Step <= Map.Size.Width - Size.Width) ? true : false;
+                    break;
                 case TankDirection.Down:
-                    return (location.Y + Step <= Map.Size.Height - Size.Height) ? true : false;
+                    break;
+                default:
+                    break;
             }
-            throw new ArgumentException();
         }
-        protected void Move(TankDirection direction)
+        protected void Move()
         {
-            if (CheckWay(direction))
+            
+            switch (Direction)
             {
-                switch (direction)
-                {
-                    case TankDirection.Left:
-                        location.X -= Step;
-                        break;
-                    case TankDirection.Up:
-                        location.Y -= Step;
-                        break;
-                    case TankDirection.Right:
-                        location.X += Step;
-                        break;
-                    case TankDirection.Down:
-                        location.Y += Step;
-                        break;
-                }
+                case TankDirection.Left:
+                    location.X -= Step;
+                    break;
+                case TankDirection.Up:
+                    location.Y -= Step;
+                    break;
+                case TankDirection.Right:
+                    location.X += Step;
+                    break;
+                case TankDirection.Down:
+                    location.Y += Step;
+                    break;
             }
+            
         }
 
-        public abstract void Control(object sender, KeyEventArgs args);
+        public abstract void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects);
     }
 }

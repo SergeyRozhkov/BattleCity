@@ -9,6 +9,5 @@ namespace BattleCity.worldOfTanks
 {
     public interface ITank
     {
-        Size Size { get; set; }
     }
 }
