@@ -92,6 +92,7 @@
     <Content Include="image\TankMain\TankRight.png" />
     <Content Include="image\TankMain\TankUp.jpg" />
     <Content Include="image\TankMain\TankUp.png" />
+    <Content Include="image\Wall\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
