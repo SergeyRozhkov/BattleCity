@@ -43,7 +43,7 @@ namespace BattleCity.worldOfTanks
             Direction = (TankDirection)args.KeyValue; // преобразовываем цифру в перечисление и записывает в Direction
             Move((TankDirection)args.KeyValue);
         }
-        void Move(TankDirection direction)
+        private void Move(TankDirection direction)
         {
             if (CheckWay(direction))
             {
@@ -64,7 +64,7 @@ namespace BattleCity.worldOfTanks
                 }
             }
         }
-        bool CheckWay(TankDirection direction)
+        private bool CheckWay(TankDirection direction)
         {
             switch (direction)
             {
