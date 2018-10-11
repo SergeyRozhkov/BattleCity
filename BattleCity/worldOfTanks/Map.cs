@@ -21,8 +21,10 @@ namespace BattleCity.worldOfTanks
             Size = new Size(600, 400);
             Tank = new TankMain();
 			CreateWall();
-        }
-        public Map(Size size) : base()
+			listGameObjects = CreatelistGameObjects(Tank, tankEmenies, wall);  // create ListGameObject in Map
+
+		}
+		public Map(Size size) : base()
         {
             Size = size;
         }
@@ -35,8 +37,8 @@ namespace BattleCity.worldOfTanks
         private List<IGameObject> CreatelistGameObjects(Tank tank, List<Tank> enemies,List<IWall> walls)
         {
             var result = new List<IGameObject>() { tank } ;
-            foreach (var item in enemies)
-                result.Add(item);
+           // foreach (var item in enemies)
+           //    result.Add(item);
             foreach (var item in walls)
                 result.Add(item);
             return result;

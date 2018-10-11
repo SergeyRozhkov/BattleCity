@@ -13,7 +13,7 @@ namespace BattleCity.worldOfTanks
         public TankMain()
         {
             Direction = TankDirection.Up;
-            location = new Point(0, 0);
+            location = new Point(100, 50);
             Size = new Size(50, 50);
             dictDirection = new Dictionary<TankDirection, Image>
             {
