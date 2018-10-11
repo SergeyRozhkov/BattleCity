@@ -12,7 +12,7 @@ namespace BattleCity.worldOfTanks
     {
         const int Step = 5;
 
-        protected static string pathImage = Application.StartupPath + @"\image\TankMain";
+        protected static string pathImage = Application.StartupPath + @"\image";
 
         public Point location;
         public  Dictionary<TankDirection, Image> dictDirection;
@@ -24,6 +24,7 @@ namespace BattleCity.worldOfTanks
         {
             get { return dictDirection[Direction]; }
         }
+
 
         protected bool CheckWay(TankDirection direction, List<IGameObject> gameObjects)
         {
@@ -129,6 +130,7 @@ namespace BattleCity.worldOfTanks
                     throw new ArgumentException("Не корректный ввод");
             }
         }
+
         protected void Move()
         {
             

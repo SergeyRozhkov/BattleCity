@@ -61,6 +61,7 @@
     <Compile Include="worldOfTanks\TankEnemy.cs" />
     <Compile Include="worldOfTanks\TankMain.cs" />
     <Compile Include="worldOfTanks\IWall.cs" />
+    <Compile Include="worldOfTanks\WallBrick.cs" />
     <EmbeddedResource Include="FormGame.resx">
       <DependentUpon>FormGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +89,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="image\TankEnemy\TankBullet.png" />
+    <Content Include="image\TankEnemy\TankDown.png" />
+    <Content Include="image\TankEnemy\TankLeft.png" />
+    <Content Include="image\TankEnemy\TankRight.png" />
+    <Content Include="image\TankEnemy\TankUp.png" />
+    <Content Include="image\TankMain\TankBullet.png" />
     <Content Include="image\TankMain\TankDown.png" />
     <Content Include="image\TankMain\TankLeft.jpg" />
     <Content Include="image\TankMain\TankLeft.png" />
