@@ -16,6 +16,7 @@ namespace BattleCity.worldOfTanks
         public List<TankEnemy> tankEmenies;
         public List<IWall> wall;
 		
+		
 
 		public Map()
         {

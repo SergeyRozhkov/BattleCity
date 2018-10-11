@@ -14,7 +14,6 @@ namespace BattleCity
     public partial class FormGame : Form
     {
         public Map Map { get; set; }
-		PictureBox BoxTankMain;
 		private PictureBox[] pictureBox = new PictureBox[100];
 		private int Counter = 20; 
 
@@ -53,8 +52,8 @@ namespace BattleCity
 
 			KeyDown += (sender, args) => {
 				Map.Tank.Control(sender, args);
-				BoxTankMain.Image = Map.Tank.Image;
-				BoxTankMain.Location = Map.Tank.Location;
+				pictureBox[0].Image = Map.Tank.Image;
+				pictureBox[0].Location = Map.Tank.Location;
 			};
 		}
 	}
