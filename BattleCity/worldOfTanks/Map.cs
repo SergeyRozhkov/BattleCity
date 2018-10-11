@@ -42,10 +42,35 @@ namespace BattleCity.worldOfTanks
             return result;
         }
 		// создание стен на мапе
+		// сдесь еще скорее всего будем вытягивать готовую карту и закидывать в лист
 		public void CreateWall()
 		{
-			wall.Add(new WallBrick(new Point(0, 0)));
+			wall = new List<IWall>();
+			int x = 0;
+			int y = 0;
+			for(int horizont = 11; horizont>0; horizont--, x+=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+
+			for(int vertical = 7; vertical>0; vertical--, y+=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+
+			for (int horizont = 11; horizont > 0; horizont--,x-=50)
+				wall.Add(new WallBrick(new Point(x, y)));
+
+			for (int vertical = 7; vertical > 0; vertical--,y-=50)
+				wall.Add(new WallBrick(new Point(x, y)));
 		}
 
-    }
+		// создание списка всех объектов
+		public List<IGameObject> CreatelistGameObjects(Tank tank, List<TankEnemy> enemies, List<IWall> walls)
+		{
+			var result = new List<IGameObject>() { tank };
+			foreach (var item in enemies)
+				result.Add(item);
+			foreach (var item in walls)
+				result.Add(item);
+			return result;
+		}
+
+	}
 }

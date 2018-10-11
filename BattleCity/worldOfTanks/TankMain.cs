@@ -17,10 +17,10 @@ namespace BattleCity.worldOfTanks
             Size = new Size(50, 50);
             dictDirection = new Dictionary<TankDirection, Image>
             {
-                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankUp.png"),
-                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankRight.png"),
-                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankDown.png"),
-                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.png")
+                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankMain\TankUp.png"),
+                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankMain\TankRight.png"),
+                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankMain\TankDown.png"),
+                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankMain\TankLeft.png")
             };
         }
         public override void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
