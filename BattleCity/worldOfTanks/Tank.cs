@@ -25,7 +25,8 @@ namespace BattleCity.worldOfTanks
             get { return dictDirection[Direction]; }
         }
 
-        protected bool CheckWay(TankDirection direction)
+		// Проверяет путь на препятствия
+        protected bool CheckWay(TankDirection direction, List<IGameObject> gameObjects)
         {
             switch (direction)
             {
@@ -40,28 +41,27 @@ namespace BattleCity.worldOfTanks
             }
             throw new ArgumentException();
         }
-        protected void Move(TankDirection direction)
-        {
-            if (CheckWay(direction))
-            {
-                switch (direction)
-                {
-                    case TankDirection.Left:
-                        location.X -= Step;
-                        break;
-                    case TankDirection.Up:
-                        location.Y -= Step;
-                        break;
-                    case TankDirection.Right:
-                        location.X += Step;
-                        break;
-                    case TankDirection.Down:
-                        location.Y += Step;
-                        break;
-                }
-            }
-        }
 
-        public abstract void Control(object sender, KeyEventArgs args);
+
+		protected void Move()
+		{
+			switch (Direction)
+			{
+				case TankDirection.Left:
+				location.X -= Step;
+				break;
+				case TankDirection.Up:
+				location.Y -= Step;
+				break;
+				case TankDirection.Right:
+				location.X += Step;
+				break;
+				case TankDirection.Down:
+				location.Y += Step;
+				break;
+			}
+		}
+
+		public abstract void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects);
     }
 }

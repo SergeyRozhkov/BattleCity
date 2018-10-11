@@ -49,9 +49,11 @@ namespace BattleCity
 				};
 				Counter++;
 			}
+			//Создает список всех объектов
+			Map.CreatelistGameObjects(Map.Tank, Map.tankEmenies, Map.wall);
 
 			KeyDown += (sender, args) => {
-				Map.Tank.Control(sender, args);
+				Map.Tank.Control(sender, args, Map.gameObjects);
 				pictureBox[0].Image = Map.Tank.Image;
 				pictureBox[0].Location = Map.Tank.Location;
 			};

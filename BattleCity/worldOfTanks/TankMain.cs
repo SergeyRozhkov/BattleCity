@@ -23,11 +23,15 @@ namespace BattleCity.worldOfTanks
                 [TankDirection.Left] = Image.FromFile(pathImage + @"\TankLeft.png")
             };
         }
-        public override void Control(object sender, KeyEventArgs args)
+        public override void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
         {
             if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
-            Direction = (TankDirection)args.KeyValue; // преобразовываем цифру в перечисление и записывает в Direction
-            Move((TankDirection)args.KeyValue);
-        }
+			bool wayChecked = CheckWay((TankDirection)args.KeyValue, gameObjects);
+			if (wayChecked)
+			{
+				Direction = (TankDirection)args.KeyValue;
+				Move();
+			}
+		}
     }
 }
