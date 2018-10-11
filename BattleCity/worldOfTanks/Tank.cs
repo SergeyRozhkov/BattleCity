@@ -31,56 +31,100 @@ namespace BattleCity.worldOfTanks
             {
                 case TankDirection.Left:
                     {
-                        var topLeftPoint = new Point(Location.X - Step, Location.Y); // танк левый верхний угол
-                        var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол
+                        var topLeftPoint = new Point(Location.X - Step, Location.Y); // танк левый верхний угол 
+                        var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол 
                         foreach (var obj in gameObjects)
                         {
                             if (this.Equals(obj)) continue;
-                            // проверяем, если припястивие выше - true, иначе false
+                            // проверяем, если припястивие выше - true, иначе false 
                             var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height ? true : false;
-                            // проверяем, если припяствие ниже - true, иначе false
+                            // проверяем, если припяствие ниже - true, иначе false 
                             var bottom = bottomLeftPoint.Y <= obj.Location.Y ? true : false;
-                            if (top || bottom) continue; // если припяствие находится вверху или внизу - начинаем заново итерацию
+                            if (top || bottom) continue; // если припяствие находится вверху или внизу - начинаем заново итерацию 
                             else
                             {
-                                var objTopRightPointX = obj.Location.X + obj.Size.Width;
-                                if (topLeftPoint.X < objTopRightPointX) // проверяем наличие объекта в переди
+                                var objRightPointX = obj.Location.X + obj.Size.Width;
+                                if (topLeftPoint.X < objRightPointX) // проверяем наличие объекта в переди 
                                     continue;
-                                if (topLeftPoint.X - objTopRightPointX >= Step) // проверяем наличие расстояние до объекта
+                                if (topLeftPoint.X - objRightPointX >= 0) // проверяем наличие расстояние до объекта 
                                     continue;
                             }
-                            return false; // если никакое условие не совпадает - false
+                            return false; // если никакое условие не совпадает - false 
                         }
+                        return true;
                     }
-                    return true;
                 case TankDirection.Up:
                     {
-                        var topLeftPoint = new Point(Location.X, Location.Y); // танк левый верхний угол
-                        var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол
+                        var topLeftPoint = new Point(Location.X, Location.Y - Step);
+                        var topRightPoint = new Point(Location.X + Size.Width, Location.Y - Step);
                         foreach (var obj in gameObjects)
                         {
                             if (this.Equals(obj)) continue;
-                            // проверяем, если припястивие выше - true, иначе false
-                            var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height ? true : false;
-                            // проверяем, если припяствие ниже - true, иначе false
-                            var bottom = bottomLeftPoint.Y <= obj.Location.Y ? true : false;
-                            if (top || bottom) continue; // если припяствие находится вверху или внизу - начинаем заново итерацию
+
+                            var left = topLeftPoint.X >= obj.Location.X + obj.Size.Width ? true : false;
+                            var right = topRightPoint.X <= obj.Location.X ? true : false;
+
+                            if (left || right) continue;
                             else
                             {
-                                var objTopRightPointX = obj.Location.X + obj.Size.Width;
-                                if (topLeftPoint.X < objTopRightPointX) // проверяем наличие объекта в переди
+                                var objBottomPointY = obj.Location.Y + obj.Size.Height;
+                                if (topLeftPoint.Y < objBottomPointY)
                                     continue;
-                                if (topLeftPoint.X - objTopRightPointX >= Step) // проверяем наличие расстояние до объекта
+                                if (topLeftPoint.Y - objBottomPointY >= 0)
                                     continue;
                             }
-                            return false; // если никакое условие не совпадает - false
+                            return false;
                         }
                         return true;
                     }
                 case TankDirection.Right:
-                    break;
+                    {
+                        var topRightPoint = new Point(Location.X + Size.Width + Step, Location.Y);
+                        var bottomRightPoint = new Point(Location.X + Size.Width + Step, Location.Y + Size.Height);
+                        foreach (var obj in gameObjects)
+                        {
+                            if (this.Equals(obj)) continue;
+
+                            var top = topRightPoint.Y >= obj.Location.Y + obj.Size.Height ? true : false;
+                            var bottom = bottomRightPoint.Y <= obj.Location.Y ? true : false;
+
+                            if (top || bottom) continue;
+                            else
+                            {
+                                var objLeftPointX = obj.Location.X;
+                                if (topRightPoint.X > objLeftPointX)
+                                    continue;
+                                if (objLeftPointX - topRightPoint.X >= 0)
+                                    continue;
+                            }
+                            return false;
+                        }
+                        return true;
+                    }
                 case TankDirection.Down:
-                    break;
+                    {
+                        var bottomLeftPoint = new Point(Location.X, Location.Y + Step + Size.Height);
+                        var bottomRightPoint = new Point(Location.X + Size.Width, Location.Y + Step + Size.Height);
+                        foreach (var obj in gameObjects)
+                        {
+                            if (this.Equals(obj)) continue;
+
+                            var left = bottomLeftPoint.X >= obj.Location.X + obj.Size.Width ? true : false;
+                            var right = bottomRightPoint.X <= obj.Location.X ? true : false;
+
+                            if (left || right) continue;
+                            else
+                            {
+                                var objTopPointY = obj.Location.Y;
+                                if (bottomLeftPoint.Y > objTopPointY)
+                                    continue;
+                                if (objTopPointY - bottomLeftPoint.Y >= 0)
+                                    continue;
+                            }
+                            return false;
+                        }
+                        return true;
+                    }
                 default:
                     throw new ArgumentException("Не корректный ввод");
             }

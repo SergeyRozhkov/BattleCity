@@ -35,7 +35,7 @@ namespace BattleCity
 				Parent = this
             };
             KeyDown += (sender, args) => {
-                Map.Tank.Control(sender, args);
+                Map.Control(sender, args);
                 BoxTankMain.Image = Map.Tank.Image;
                 BoxTankMain.Location = Map.Tank.Location;
             };
