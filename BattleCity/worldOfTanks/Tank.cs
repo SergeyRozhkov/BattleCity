@@ -12,7 +12,7 @@ namespace BattleCity.worldOfTanks
     {
         const int Step = 5;
 
-        protected static string pathImage = Application.StartupPath + @"\image\TankMain";
+        protected static string pathImage = Application.StartupPath + @"\image";
 
         public Point location;
         public  Dictionary<TankDirection, Image> dictDirection;

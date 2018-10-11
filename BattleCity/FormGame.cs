@@ -15,7 +15,8 @@ namespace BattleCity
     {
         public Map Map { get; set; }
 		private PictureBox[] pictureBox = new PictureBox[100];
-		private int Counter = 20; 
+		private int Counter = 20; // этот счетчик сделал, чтоб пикчер боксы перебирать для стен, начиная с 20.
+		// до 20 идет для танков, с запасиком)
 
 		public FormGame(Map map)
         {
@@ -24,11 +25,13 @@ namespace BattleCity
             Create();
         }
 
+
         void Create()
         {
             BackColor = Color.Black;
             ClientSize = Map.Size;
-
+			Map.listGameObjects = Map.CreatelistGameObjects(Map.Tank, Map.tankEmenies, Map.wall);  // create ListGameObject in Map
+			
 			//пикчер бокс для TankMain
 			pictureBox[0] = new PictureBox
 			{
@@ -49,11 +52,9 @@ namespace BattleCity
 				};
 				Counter++;
 			}
-			//Создает список всех объектов
-			Map.CreatelistGameObjects(Map.Tank, Map.tankEmenies, Map.wall);
 
 			KeyDown += (sender, args) => {
-				Map.Tank.Control(sender, args, Map.gameObjects);
+				Map.Tank.Control(sender, args, Map.listGameObjects);
 				pictureBox[0].Image = Map.Tank.Image;
 				pictureBox[0].Location = Map.Tank.Location;
 			};
