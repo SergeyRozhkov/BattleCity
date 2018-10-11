@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace BattleCity.worldOfTanks
 {
     public interface IWall : IGameObject
+
     {
-    }
+	}
 }

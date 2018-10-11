@@ -61,6 +61,7 @@
     <Compile Include="worldOfTanks\TankEnemy.cs" />
     <Compile Include="worldOfTanks\TankMain.cs" />
     <Compile Include="worldOfTanks\IWall.cs" />
+    <Compile Include="worldOfTanks\WallBrick.cs" />
     <EmbeddedResource Include="FormGame.resx">
       <DependentUpon>FormGame.cs</DependentUpon>
     </EmbeddedResource>

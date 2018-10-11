@@ -20,6 +20,7 @@ namespace BattleCity.worldOfTanks
         {
             Size = new Size(600, 400);
             Tank = new TankMain();
+			CreateWall();
         }
         public Map(Size size) : base()
         {
@@ -40,5 +41,11 @@ namespace BattleCity.worldOfTanks
                 result.Add(item);
             return result;
         }
+		// создание стен на мапе
+		public void CreateWall()
+		{
+			wall.Add(new WallBrick(new Point(0, 0)));
+		}
+
     }
 }
