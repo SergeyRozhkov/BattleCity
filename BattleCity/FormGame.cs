@@ -30,7 +30,6 @@ namespace BattleCity
         {
             BackColor = Color.Black;
             ClientSize = Map.Size;
-			Map.listGameObjects = Map.CreatelistGameObjects(Map.Tank, Map.tankEmenies, Map.wall);  // create ListGameObject in Map
 			
 			//пикчер бокс для TankMain
 			pictureBox[0] = new PictureBox
@@ -54,7 +53,7 @@ namespace BattleCity
 			}
 
 			KeyDown += (sender, args) => {
-				Map.Tank.Control(sender, args, Map.listGameObjects);
+				Map.Control(sender, args);
 				pictureBox[0].Image = Map.Tank.Image;
 				pictureBox[0].Location = Map.Tank.Location;
 			};
