@@ -30,26 +30,59 @@ namespace BattleCity.worldOfTanks
             switch (direction)
             {
                 case TankDirection.Left:
-                    var topLeft = new Point(Location.X - Step, Location.Y);
-                    var bottomLeft = new Point(Location.X - Step, Location.Y - Size.Height);
-                    foreach (var obj in gameObjects)
                     {
-                        var top = topLeft.Y > obj.Location.Y + obj.Size.Height? true : false;
-                        var bottom = bottomLeft.Y < obj.Location.Y ? true : false;
-                        if (top || bottom)
+                        var topLeftPoint = new Point(Location.X - Step, Location.Y); // танк левый верхний угол
+                        var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол
+                        foreach (var obj in gameObjects)
                         {
-
+                            if (this.Equals(obj)) continue;
+                            // проверяем, если припястивие выше - true, иначе false
+                            var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height ? true : false;
+                            // проверяем, если припяствие ниже - true, иначе false
+                            var bottom = bottomLeftPoint.Y <= obj.Location.Y ? true : false;
+                            if (top || bottom) continue; // если припяствие находится вверху или внизу - начинаем заново итерацию
+                            else
+                            {
+                                var objTopRightPointX = obj.Location.X + obj.Size.Width;
+                                if (topLeftPoint.X < objTopRightPointX) // проверяем наличие объекта в переди
+                                    continue;
+                                if (topLeftPoint.X - objTopRightPointX >= Step) // проверяем наличие расстояние до объекта
+                                    continue;
+                            }
+                            return false; // если никакое условие не совпадает - false
                         }
                     }
-                    break;
+                    return true;
                 case TankDirection.Up:
-                    break;
+                    {
+                        var topLeftPoint = new Point(Location.X, Location.Y); // танк левый верхний угол
+                        var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол
+                        foreach (var obj in gameObjects)
+                        {
+                            if (this.Equals(obj)) continue;
+                            // проверяем, если припястивие выше - true, иначе false
+                            var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height ? true : false;
+                            // проверяем, если припяствие ниже - true, иначе false
+                            var bottom = bottomLeftPoint.Y <= obj.Location.Y ? true : false;
+                            if (top || bottom) continue; // если припяствие находится вверху или внизу - начинаем заново итерацию
+                            else
+                            {
+                                var objTopRightPointX = obj.Location.X + obj.Size.Width;
+                                if (topLeftPoint.X < objTopRightPointX) // проверяем наличие объекта в переди
+                                    continue;
+                                if (topLeftPoint.X - objTopRightPointX >= Step) // проверяем наличие расстояние до объекта
+                                    continue;
+                            }
+                            return false; // если никакое условие не совпадает - false
+                        }
+                        return true;
+                    }
                 case TankDirection.Right:
                     break;
                 case TankDirection.Down:
                     break;
                 default:
-                    break;
+                    throw new ArgumentException("Не корректный ввод");
             }
         }
         protected void Move()
