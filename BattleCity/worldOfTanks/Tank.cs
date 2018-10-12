@@ -35,7 +35,7 @@ namespace BattleCity.worldOfTanks
                         var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол 
                         foreach (var obj in gameObjects)
                         {
-                            if (this.Equals(obj)) continue
+							if (this.Equals(obj)) continue;
                             var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height;
                             var bottom = bottomLeftPoint.Y <= obj.Location.Y;
                             var left = topLeftPoint.X >= obj.Location.X + obj.Size.Width;
