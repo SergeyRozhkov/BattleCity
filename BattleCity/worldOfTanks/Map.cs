@@ -36,8 +36,8 @@ namespace BattleCity.worldOfTanks
         private List<IGameObject> CreatelistGameObjects(Tank tank, List<Tank> enemies,List<IWall> walls)
         {
             var result = new List<IGameObject>() { tank } ;
-            foreach (var item in enemies)
-                result.Add(item);
+           // foreach (var item in enemies)
+           //    result.Add(item);
             foreach (var item in walls)
                 result.Add(item);
             return result;
