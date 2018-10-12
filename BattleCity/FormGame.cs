@@ -15,8 +15,7 @@ namespace BattleCity
     {
         public Map Map { get; set; }
 		private PictureBox[] pictureBox = new PictureBox[100];
-		private int Counter = 20; // этот счетчик сделал, чтоб пикчер боксы перебирать для стен, начиная с 20.
-		// до 20 идет для танков, с запасиком)
+		private int Counter = 1; // этот счетчик сделал, чтоб пикчер боксы перебирать
 
 		public FormGame(Map map)
         {

@@ -51,6 +51,7 @@
     <Compile Include="FormGame.Designer.cs">
       <DependentUpon>FormGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="worldOfTanks\Bullet.cs" />
     <Compile Include="worldOfTanks\IGameObject.cs" />
     <Compile Include="worldOfTanks\ITank.cs" />
     <Compile Include="worldOfTanks\Map.cs" />
@@ -94,7 +95,7 @@
     <Content Include="image\TankEnemy\TankLeft.png" />
     <Content Include="image\TankEnemy\TankRight.png" />
     <Content Include="image\TankEnemy\TankUp.png" />
-    <Content Include="image\TankMain\TankBullet.png" />
+    <Content Include="image\TankMain\BulletUp.png" />
     <Content Include="image\TankMain\TankDown.png" />
     <Content Include="image\TankMain\TankLeft.jpg" />
     <Content Include="image\TankMain\TankLeft.png" />
