@@ -13,7 +13,7 @@ namespace BattleCity.worldOfTanks
     {
         public static Size Size { get; private set; }
         public Tank Tank { get; private set; }
-        public List<Tank> tankEmenies;
+        //public List<Tank> tankEmenies;
         public List<IWall> wall;
         private List<IGameObject> listGameObjects;
         public Map()
@@ -21,10 +21,9 @@ namespace BattleCity.worldOfTanks
             Size = new Size(600, 400);
             Tank = new TankMain();
 			CreateWall();
-			listGameObjects = CreatelistGameObjects(Tank, tankEmenies, wall);  // create ListGameObject in Map
-
-		}
-		public Map(Size size) : base()
+            listGameObjects = CreatelistGameObjects();
+        }
+        public Map(Size size) : base()
         {
             Size = size;
         }
@@ -64,12 +63,12 @@ namespace BattleCity.worldOfTanks
 		}
 
 		// создание списка всех объектов
-		public List<IGameObject> CreatelistGameObjects(Tank tank, List<TankEnemy> enemies, List<IWall> walls)
+		public List<IGameObject> CreatelistGameObjects()
 		{
-			var result = new List<IGameObject>() { tank };
-			foreach (var item in enemies)
-				result.Add(item);
-			foreach (var item in walls)
+			var result = new List<IGameObject>() { Tank };
+			//foreach (var item in tankEmenies)
+			//	result.Add(item);
+			foreach (var item in wall)
 				result.Add(item);
 			return result;
 		}
