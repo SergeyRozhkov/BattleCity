@@ -28,7 +28,7 @@ namespace BattleCity.worldOfTanks
             Size = size;
         }
         
-		// управление игровым проецессом
+		// передает контроль в tankMain
         public void Control(object sender, KeyEventArgs args)
         {
             tankMain.Control(sender, args, listGameObjects);
