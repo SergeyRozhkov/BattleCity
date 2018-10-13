@@ -8,7 +8,6 @@ using System.Drawing;
 namespace BattleCity.worldOfTanks
 {
     public interface IWall : IGameObject
-
     {
 		Image Image { get; set; }
 	}

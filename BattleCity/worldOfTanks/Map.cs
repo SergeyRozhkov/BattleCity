@@ -12,14 +12,14 @@ namespace BattleCity.worldOfTanks
     public class Map
     {
         public static Size Size { get; private set; }
-        public Tank Tank { get; private set; }
-        //public List<Tank> tankEmenies;
+        public TankMain tankMain { get; private set; }
+        public List<Tank> tankEmenies;
         public List<IWall> wall;
         private List<IGameObject> listGameObjects;
         public Map()
         {
-            Size = new Size(600, 400);
-            Tank = new TankMain();
+            Size = new Size(700, 600);
+            tankMain = new TankMain();
 			CreateWall();
             listGameObjects = CreatelistGameObjects();
         }
@@ -27,45 +27,36 @@ namespace BattleCity.worldOfTanks
         {
             Size = size;
         }
-        // управление игровым проецессом
+        
+		// передает контроль в tankMain
         public void Control(object sender, KeyEventArgs args)
         {
-            Tank.Control(sender, args, listGameObjects);
+            tankMain.Control(sender, args, listGameObjects);
         }
-        // создание списка всех объектов
-        private List<IGameObject> CreatelistGameObjects(Tank tank, List<Tank> enemies,List<IWall> walls)
-        {
-            var result = new List<IGameObject>() { tank } ;
-           // foreach (var item in enemies)
-           //    result.Add(item);
-            foreach (var item in walls)
-                result.Add(item);
-            return result;
-        }
-		// создание стен на мапе
-		// сдесь еще скорее всего будем вытягивать готовую карту и закидывать в лист
+
+		// создание стен
 		public void CreateWall()
 		{
 			wall = new List<IWall>();
 			int x = 0;
 			int y = 0;
-			for(int horizont = 11; horizont>0; horizont--, x+=50)
+			for(int horizont = (Size.Width/50)-1; horizont>0; horizont--, x+=50)
 				wall.Add(new WallBrick(new Point(x, y)));
 
-			for(int vertical = 7; vertical>0; vertical--, y+=50)
+			for(int vertical = (Size.Height/50)-1; vertical>0; vertical--, y+=50)
 				wall.Add(new WallBrick(new Point(x, y)));
 
-			for (int horizont = 11; horizont > 0; horizont--,x-=50)
+			for (int horizont = (Size.Width / 50)-1; horizont > 0; horizont--,x-=50)
 				wall.Add(new WallBrick(new Point(x, y)));
 
-			for (int vertical = 7; vertical > 0; vertical--,y-=50)
+			for (int vertical = (Size.Height / 50)-1; vertical > 0; vertical--,y-=50)
 				wall.Add(new WallBrick(new Point(x, y)));
 		}
 
 		// создание списка всех объектов
 		public List<IGameObject> CreatelistGameObjects()
 		{
-			var result = new List<IGameObject>() { Tank };
+			var result = new List<IGameObject>() { tankMain };
 			//foreach (var item in tankEmenies)
 			//	result.Add(item);
 			foreach (var item in wall)

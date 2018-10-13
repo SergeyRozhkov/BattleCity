@@ -13,7 +13,7 @@ namespace BattleCity.worldOfTanks
 		public TankEnemy()
 		{
 			Direction = TankDirection.Up;
-			location = new Point(0, 0);
+			Location = new Point(0, 0);
 			Size = new Size(50, 50);
 			dictDirection = new Dictionary<TankDirection, Image>
 			{
@@ -24,9 +24,9 @@ namespace BattleCity.worldOfTanks
 			};
 		}
 
-		public override void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
+		public void AutoControl(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
 		{
-
+			// ТУТ АВТОПИЛОТ
 		}
 	}
 }

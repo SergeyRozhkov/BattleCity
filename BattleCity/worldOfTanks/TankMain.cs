@@ -13,7 +13,7 @@ namespace BattleCity.worldOfTanks
         public TankMain()
         {
             Direction = TankDirection.Up;
-            location = new Point(100, 100);
+            Location = new Point(100, 100);
             Size = new Size(50, 50);
             dictDirection = new Dictionary<TankDirection, Image>
             {
@@ -23,14 +23,13 @@ namespace BattleCity.worldOfTanks
                 [TankDirection.Left] = Image.FromFile(pathImage + @"\TankMain\TankLeft.png")
             };
         }
-        public override void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
+        public void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
         {
             if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
             bool wayChecked = CheckWay((TankDirection)args.KeyValue, gameObjects);
             Direction = (TankDirection)args.KeyValue;
             if (wayChecked)
                 Move();
-                
         }
     }
 }

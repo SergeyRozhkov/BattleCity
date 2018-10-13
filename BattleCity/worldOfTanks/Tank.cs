@@ -14,7 +14,7 @@ namespace BattleCity.worldOfTanks
 
         protected static string pathImage = Application.StartupPath + @"\image";
 
-        public Point location;
+        private Point location;
         public  Dictionary<TankDirection, Image> dictDirection;
 
         protected TankDirection Direction { get; set; }
@@ -118,7 +118,5 @@ namespace BattleCity.worldOfTanks
             }
             
         }
-
-        public abstract void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects);
     }
 }
