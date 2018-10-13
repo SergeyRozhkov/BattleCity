@@ -12,6 +12,7 @@ namespace BattleCity.worldOfTanks
 	{
 		private const int step = 5;
 
+
 		private Point location;
 		private Size TankSize;
 		public Point Location { get => location; set => location = value; }
@@ -57,6 +58,5 @@ namespace BattleCity.worldOfTanks
 			}
 		}
 		
-
 	}
 }
