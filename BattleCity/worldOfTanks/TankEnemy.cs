@@ -24,9 +24,9 @@ namespace BattleCity.worldOfTanks
 			};
 		}
 
-		public override void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
+		public void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
 		{
-
+			// ТУТ АВТОПИЛОТ
 		}
 	}
 }

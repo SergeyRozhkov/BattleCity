@@ -33,9 +33,9 @@ namespace BattleCity
 			//пикчер бокс для TankMain
 			pictureBox[0] = new PictureBox
 			{
-				Size = Map.Tank.Size,
-				Image = Map.Tank.Image,
-				Location = Map.Tank.Location,
+				Size = Map.tankMain.Size,
+				Image = Map.tankMain.Image,
+				Location = Map.tankMain.Location,
 				Parent = this
             };
 			//выдает пикчер боксы WallBrick
@@ -53,8 +53,8 @@ namespace BattleCity
 
 			KeyDown += (sender, args) => {
 				Map.Control(sender, args);
-				pictureBox[0].Image = Map.Tank.Image;
-				pictureBox[0].Location = Map.Tank.Location;
+				pictureBox[0].Image = Map.tankMain.Image;
+				pictureBox[0].Location = Map.tankMain.Location;
 			};
 		}
 	}

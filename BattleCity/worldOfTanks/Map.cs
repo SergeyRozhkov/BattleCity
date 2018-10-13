@@ -12,14 +12,14 @@ namespace BattleCity.worldOfTanks
     public class Map
     {
         public static Size Size { get; private set; }
-        public Tank Tank { get; private set; }
+        public TankMain tankMain { get; private set; }
         public List<Tank> tankEmenies;
         public List<IWall> wall;
         private List<IGameObject> listGameObjects;
         public Map()
         {
             Size = new Size(700, 600);
-            Tank = new TankMain();
+            tankMain = new TankMain();
 			CreateWall();
             listGameObjects = CreatelistGameObjects();
         }
@@ -31,7 +31,7 @@ namespace BattleCity.worldOfTanks
 		// управление игровым проецессом
         public void Control(object sender, KeyEventArgs args)
         {
-            Tank.Control(sender, args, listGameObjects);
+            tankMain.Control(sender, args, listGameObjects);
         }
 
 		// создание стен
@@ -56,7 +56,7 @@ namespace BattleCity.worldOfTanks
 		// создание списка всех объектов
 		public List<IGameObject> CreatelistGameObjects()
 		{
-			var result = new List<IGameObject>() { Tank };
+			var result = new List<IGameObject>() { tankMain };
 			//foreach (var item in tankEmenies)
 			//	result.Add(item);
 			foreach (var item in wall)

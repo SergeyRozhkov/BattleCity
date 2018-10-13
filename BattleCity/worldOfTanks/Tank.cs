@@ -118,7 +118,5 @@ namespace BattleCity.worldOfTanks
             }
             
         }
-
-        public abstract void Control(object sender, KeyEventArgs args, List<IGameObject> gameObjects);
     }
 }
