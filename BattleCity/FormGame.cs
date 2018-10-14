@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BattleCity.worldOfTanks;
 
@@ -13,49 +12,82 @@ namespace BattleCity
 {
     public partial class FormGame : Form
     {
-        public Map Map { get; set; }
-		private PictureBox[] pictureBox = new PictureBox[100];
-		private int Counter = 1; // этот счетчик сделал, чтоб пикчер боксы перебирать
+        Map Map { get; set; }
+        PictureBox TankMajor { get; set; }
+        List<PictureBox> PictureWalls { get; set; }
+        List<PictureBox> PuctureEnemies { get; set; }
+        Timer Timer { get; set; }
+		
 
 		public FormGame(Map map)
         {
-            InitializeComponent();
-            Map = map;
-            Create();
+            Map = map; // Обязательно перед любоей доп. инициализации
+            InitializeComponent(); // что-то там создает
+            ClientSize = Map.Size; // размер окна
+            TankMajor = CreateTankMain(); // Создает основной крутой танк
+            PictureWalls = CreateBoxForWalls(); // Создает боксы для стен
+            PuctureEnemies = CreateBoxForEnemies(); // враги
+            // событие при нажатии на кнопки
+            KeyDown += (sender, args) => {
+                Map.Control(sender, args);
+                TankMajor.Image = Map.tankMain.Image;
+                TankMajor.Location = Map.tankMain.Location;
+            };
+
+            Timer = new Timer();
+            Timer.Interval = 200;
+            Timer.Tick += (sender, args) =>
+            {
+                Map.ControlEventEnemyTanks(sender, args);
+                //for (int i = 0; i < PuctureEnemies.Count; i++)
+                //{
+                //    PuctureEnemies[i].Size = Map.wall[i].Size;
+                //    PuctureEnemies[i].Image = Map.wall[i].Image;
+                //    PuctureEnemies[i].Location = Map.wall[i].Location;
+                //}
+            };
+            Timer.Start();
         }
 
-
-        void Create()
+        PictureBox CreateTankMain()
         {
-            BackColor = Color.Black;
-            ClientSize = Map.Size;
-			
-			//пикчер бокс для TankMain
-			pictureBox[0] = new PictureBox
-			{
-				Size = Map.tankMain.Size,
-				Image = Map.tankMain.Image,
-				Location = Map.tankMain.Location,
-				Parent = this
+            return new PictureBox
+            {
+                Size = Map.tankMain.Size,
+                Image = Map.tankMain.Image,
+                Location = Map.tankMain.Location,
+                Parent = this
             };
-			//выдает пикчер боксы WallBrick
-			foreach (IWall wall in Map.wall)
-			{
-				pictureBox[Counter] = new PictureBox
-				{
-					Size = wall.Size,
-					Image = wall.Image,
-					Location = wall.Location,
-				    Parent = this
-				};
-				Counter++;
-			}
+        }
+        List<PictureBox> CreateBoxForWalls()
+        {
+            var result = new List<PictureBox>();
+            for (int i = 0; i < Map.wall.Count; i++)
+                result.Add(new PictureBox
+                {
+                    Size = Map.wall[i].Size,
+                    Image = Map.wall[i].Image,
+                    Location = Map.wall[i].Location,
+                    Parent = this
+                });
+            return result;
+        }
+        List<PictureBox> CreateBoxForEnemies()
+        {
+            var result = new List<PictureBox>();
+            for (int i = 0; i < Map.tankEmenies.Count; i++)
+                result.Add(new PictureBox
+                {
+                    Size = Map.wall[i].Size,
+                    Image = Map.wall[i].Image,
+                    Location = Map.wall[i].Location,
+                    Parent = this
+                });
+            return result;
+        }
+        private void FormGame_Load(object sender, EventArgs e)
+        {
 
-			KeyDown += (sender, args) => {
-				Map.Control(sender, args);
-				pictureBox[0].Image = Map.tankMain.Image;
-				pictureBox[0].Location = Map.tankMain.Location;
-			};
-		}
-	}
+        }
+    }
 }

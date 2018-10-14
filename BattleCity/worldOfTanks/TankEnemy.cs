@@ -10,10 +10,12 @@ namespace BattleCity.worldOfTanks
 {
 	public class TankEnemy : Tank
 	{
+        Random random = new Random();
+
 		public TankEnemy()
 		{
-			Direction = TankDirection.Up;
-			Location = new Point(0, 0);
+			Direction = (TankDirection)random.Next(37,41);
+			Location = new Point(300, 100);
 			Size = new Size(50, 50);
 			dictDirection = new Dictionary<TankDirection, Image>
 			{
@@ -24,9 +26,32 @@ namespace BattleCity.worldOfTanks
 			};
 		}
 
-		public void AutoControl(object sender, KeyEventArgs args, List<IGameObject> gameObjects)
-		{
-			// ТУТ АВТОПИЛОТ
-		}
-	}
+        public override void Control(object sender, EventArgs args, List<IGameObject> gameObjects)
+        {
+            var wayChecked = CheckWay(Direction, gameObjects);
+            if (wayChecked)
+                Move();
+            else
+                Direction = (TankDirection)random.Next(37, 41);
+        }
+
+        protected override void Move()
+        {
+            switch (Direction)
+            {
+                case TankDirection.Left:
+                    location.X -= Step;
+                    break;
+                case TankDirection.Up:
+                    location.Y -= Step;
+                    break;
+                case TankDirection.Right:
+                    location.X += Step;
+                    break;
+                case TankDirection.Down:
+                    location.Y += Step;
+                    break;
+            }
+        }
+    }
 }

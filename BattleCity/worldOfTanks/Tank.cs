@@ -10,11 +10,11 @@ namespace BattleCity.worldOfTanks
 {
     public abstract class Tank : IGameObject
     {
-        const int Step = 5;
+        protected const int Step = 5;
 
         protected static string pathImage = Application.StartupPath + @"\image";
 
-        private Point location;
+        protected Point location;
         public  Dictionary<TankDirection, Image> dictDirection;
 
         protected TankDirection Direction { get; set; }
@@ -98,25 +98,7 @@ namespace BattleCity.worldOfTanks
             }
         }
 
-        protected void Move()
-        {
-            
-            switch (Direction)
-            {
-                case TankDirection.Left:
-                    location.X -= Step;
-                    break;
-                case TankDirection.Up:
-                    location.Y -= Step;
-                    break;
-                case TankDirection.Right:
-                    location.X += Step;
-                    break;
-                case TankDirection.Down:
-                    location.Y += Step;
-                    break;
-            }
-            
-        }
+        protected abstract void Move();
+        public abstract void Control(object sender, EventArgs args, List<IGameObject> gameObjects);
     }
 }
