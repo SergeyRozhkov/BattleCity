@@ -12,11 +12,11 @@ namespace BattleCity.worldOfTanks
 	{
         Random random = new Random();
 
-		public TankEnemy()
+		public TankEnemy(Size size, Point location, TankDirection direction	)
 		{
-			Direction = (TankDirection)random.Next(37,41);
-			Location = new Point(300, 100);
-			Size = new Size(50, 50);
+			Direction = direction;
+			Location = location;
+			Size = size;
 			dictDirection = new Dictionary<TankDirection, Image>
 			{
 				[TankDirection.Up] = Image.FromFile(pathImage + @"\TankEnemy\TankUp.png"),

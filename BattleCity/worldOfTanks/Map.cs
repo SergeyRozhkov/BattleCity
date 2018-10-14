@@ -13,28 +13,30 @@ namespace BattleCity.worldOfTanks
     {
         public Size Size { get; private set; }
         public Tank tankMain { get; private set; }
-        public List<Tank> tankEmenies;
+        public List<Tank> tankEnemies;
         public List<IWall> wall;
         private List<IGameObject> listGameObjects;
         public Map()
         {
-            Size = new Size(700, 600);
-            tankMain = new TankMain();
-            wall = CreateWall();
-            tankEmenies = CreateEnemies();
-            listGameObjects = CreatelistGameObjects();
+            Size = new Size(700, 600);															// Задание размера карты
+			tankMain = new TankMain(new Size(50, 50), new Point(300, 500), TankDirection.Up);	// Создание Main танка
+            wall = CreateWall();								// Создание стен и занесение их в лист wall
+			tankEnemies = CreateEnemies();						// Создание врагов и занесение их в лист tankEnemies
+            listGameObjects = CreatelistGameObjects();			// Создание листа всех объектов
         }
         public Map(Size size) : base()
         {
             Size = size;
         }
-        // контроль над всеми врагами
+
+        // Метод активируемый таймером, для контроля всех врагов
         public void ControlEventEnemyTanks(object sender, EventArgs args)
         {
-            foreach (var tank in tankEmenies)
+            foreach (var tank in tankEnemies)
                 tank.Control(sender, args, listGameObjects);
         }
-		// передает контроль в tankMain
+
+		// Передает контроль Main танку
         public void Control(object sender, KeyEventArgs args)
         {
             tankMain.Control(sender, args, listGameObjects);
@@ -59,19 +61,24 @@ namespace BattleCity.worldOfTanks
                 result.Add(new WallBrick(new Point(x, y)));
             return result;
 		}
-        // создание врагов
+        
+		// создание врагов
         List<Tank> CreateEnemies()
         {
             var result = new List<Tank>();
-            result.Add(new TankEnemy());
-            return result;
+			for (int i = 1; i < 13; i++)
+				result.Add(new TankEnemy(new Size(50, 50), new Point(i*50, b*50), TankDirection.Down));
+			//result.Add(new TankEnemy(new Size(50, 50), new Point(100, 50), TankDirection.Down));
+			//result.Add(new TankEnemy(new Size(50, 50), new Point(600, 50), TankDirection.Down));
+			return result;
         }
+
 		// создание списка всех объектов
 		public List<IGameObject> CreatelistGameObjects()
 		{
 			var result = new List<IGameObject>() { tankMain };
-            foreach (var item in tankEmenies)
-                result.Add(item);
+           foreach (var item in tankEnemies)
+               result.Add(item);
             foreach (var item in wall)
 				result.Add(item);
 			return result;

@@ -10,12 +10,12 @@ namespace BattleCity.worldOfTanks
 {
     public class TankMain : Tank
     {
-        public TankMain()
-        {
-            Direction = TankDirection.Up;
-            Location = new Point(100, 100);
-            Size = new Size(50, 50);
-            dictDirection = new Dictionary<TankDirection, Image>
+		public TankMain(Size size, Point location, TankDirection direction)
+		{
+			Direction = direction;
+			Location = location;
+			Size = size;
+			dictDirection = new Dictionary<TankDirection, Image>
             {
                 [TankDirection.Up] = Image.FromFile(pathImage + @"\TankMain\TankUp.png"),
                 [TankDirection.Right] = Image.FromFile(pathImage + @"\TankMain\TankRight.png"),
