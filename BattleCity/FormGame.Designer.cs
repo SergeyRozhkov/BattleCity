@@ -38,7 +38,6 @@
             this.Name = "FormGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGame";
-            this.Load += new System.EventHandler(this.FormGame_Load);
             this.ResumeLayout(false);
             this.BackColor = System.Drawing.Color.Black;
         }

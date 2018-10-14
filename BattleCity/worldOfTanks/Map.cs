@@ -64,6 +64,8 @@ namespace BattleCity.worldOfTanks
         {
             var result = new List<Tank>();
             result.Add(new TankEnemy());
+            result.Add(new TankEnemy());
+            result.Add(new TankEnemy());
             return result;
         }
 		// создание списка всех объектов
