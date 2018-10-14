@@ -36,17 +36,17 @@ namespace BattleCity
 
             Timer = new Timer();
             Timer.Interval = 200;
-            Timer.Tick += (sender, args) =>
-            {
-                Map.ControlEventEnemyTanks(sender, args);
-                //for (int i = 0; i < PuctureEnemies.Count; i++)
-                //{
-                //    PuctureEnemies[i].Size = Map.wall[i].Size;
-                //    PuctureEnemies[i].Image = Map.wall[i].Image;
-                //    PuctureEnemies[i].Location = Map.wall[i].Location;
-                //}
-            };
-            Timer.Start();
+			Timer.Tick += (sender, args) =>
+			{
+				Map.ControlEventEnemyTanks(sender, args);
+				for (int i = 0; i < PuctureEnemies.Count; i++)
+				{
+					PuctureEnemies[i].Size = Map.tankEmenies[i].Size;
+					PuctureEnemies[i].Image = Map.tankEmenies[i].Image;
+					PuctureEnemies[i].Location = Map.tankEmenies[i].Location;
+				}
+			};
+			Timer.Start();
         }
 
         PictureBox CreateTankMain()
