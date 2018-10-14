@@ -18,8 +18,8 @@ namespace BattleCity.worldOfTanks
         private List<IGameObject> listGameObjects;
         public Map()
         {
-            Size = new Size(700, 600);															// Задание размера карты
-			tankMain = new TankMain(new Size(50, 50), new Point(300, 500), TankDirection.Up);	// Создание Main танка
+            Size = new Size(700, 600);											// Задание размера карты
+			tankMain = new TankMain(new Point(300, 500), TankDirection.Up);		// Создание Main танка
             wall = CreateWall();								// Создание стен и занесение их в лист wall
 			tankEnemies = CreateEnemies();						// Создание врагов и занесение их в лист tankEnemies
             listGameObjects = CreatelistGameObjects();			// Создание листа всех объектов
@@ -67,9 +67,9 @@ namespace BattleCity.worldOfTanks
         {
             var result = new List<Tank>();
 			for (int i = 1; i < 13; i++)
-				result.Add(new TankEnemy(new Size(50, 50), new Point(i*50, b*50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Size(50, 50), new Point(100, 50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Size(50, 50), new Point(600, 50), TankDirection.Down));
+				result.Add(new TankEnemy(new Point(i*50, 50), TankDirection.Down));
+			//result.Add(new TankEnemy(new Point(100, 50), TankDirection.Down));
+			//result.Add(new TankEnemy(new Point(600, 50), TankDirection.Down));
 			return result;
         }
 
