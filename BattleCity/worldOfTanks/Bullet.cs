@@ -46,14 +46,14 @@ namespace BattleCity.worldOfTanks
 				case TankDirection.Right:
 					Size = new Size(25, 8);
 					Image = Image.FromFile(Application.StartupPath + @"\image\Bullet\BulletRight.png");
-					location.X += TankSize.Width;
+					location.X += TankSize.Width-Size.Width;
 					location.Y += (TankSize.Height-Size.Height)/2;
 					break;
 				case TankDirection.Down:
 					Size = new Size(8, 25);
 					Image = Image.FromFile(Application.StartupPath + @"\image\Bullet\BulletDown.png");
 					location.X += (TankSize.Width-Size.Width)/2;
-					location.Y += TankSize.Height;
+					location.Y += TankSize.Height-Size.Height;
 					break;
 			}
 		}
