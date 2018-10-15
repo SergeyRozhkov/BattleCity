@@ -21,7 +21,7 @@ namespace BattleCity
 
 		public FormGame(Map map)
         {
-            Map = map; // Обязательно перед любоей доп. инициализации
+            Map = map; // Обязательно перед любой доп. инициализацией
             InitializeComponent(); // что-то там создает
             ClientSize = Map.Size; // размер окна
             TankMajor = CreateTankMain(); // Создает основной крутой танк
@@ -35,15 +35,14 @@ namespace BattleCity
             };
 
             Timer = new Timer();
-            Timer.Interval = 200;
+            Timer.Interval = 40;
 			Timer.Tick += (sender, args) =>
 			{
 				Map.ControlEventEnemyTanks(sender, args);
 				for (int i = 0; i < PuctureEnemies.Count; i++)
 				{
-					PuctureEnemies[i].Size = Map.tankEmenies[i].Size;
-					PuctureEnemies[i].Image = Map.tankEmenies[i].Image;
-					PuctureEnemies[i].Location = Map.tankEmenies[i].Location;
+					PuctureEnemies[i].Image = Map.tankEnemies[i].Image;
+					PuctureEnemies[i].Location = Map.tankEnemies[i].Location;
 				}
 			};
 			Timer.Start();
@@ -75,12 +74,12 @@ namespace BattleCity
         List<PictureBox> CreateBoxForEnemies()
         {
             var result = new List<PictureBox>();
-            for (int i = 0; i < Map.tankEmenies.Count; i++)
+            for (int i = 0; i < Map.tankEnemies.Count; i++)
                 result.Add(new PictureBox
                 {
-                    Size = Map.wall[i].Size,
-                    Image = Map.wall[i].Image,
-                    Location = Map.wall[i].Location,
+                    Size = Map.tankEnemies[i].Size,
+                    Image = Map.tankEnemies[i].Image,
+                    Location = Map.tankEnemies[i].Location,
                     Parent = this
                 });
             return result;

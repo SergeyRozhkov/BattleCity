@@ -12,11 +12,8 @@ namespace BattleCity.worldOfTanks
 	{
         Random random = new Random();
 
-		public TankEnemy()
+		public TankEnemy(Point location, TankDirection direction	)
 		{
-			Direction = (TankDirection)random.Next(37,41);
-			Location = new Point(300, 100);
-			Size = new Size(50, 50);
 			dictDirection = new Dictionary<TankDirection, Image>
 			{
 				[TankDirection.Up] = Image.FromFile(pathImage + @"\TankEnemy\TankUp.png"),
@@ -24,6 +21,9 @@ namespace BattleCity.worldOfTanks
 				[TankDirection.Down] = Image.FromFile(pathImage + @"\TankEnemy\TankDown.png"),
 				[TankDirection.Left] = Image.FromFile(pathImage + @"\TankEnemy\TankLeft.png")
 			};
+			Direction = direction;
+			Location = location;
+			Size = Image.Size;
 		}
 
         public override void Control(object sender, EventArgs args, List<IGameObject> gameObjects)
