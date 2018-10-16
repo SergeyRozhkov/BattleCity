@@ -66,10 +66,9 @@ namespace BattleCity.worldOfTanks
         List<Tank> CreateEnemies()
         {
             var result = new List<Tank>();
-			for (int i = 1; i < 13; i++)
-				result.Add(new TankEnemy(new Point(i*50, 50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Point(100, 50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Point(600, 50), TankDirection.Down));
+		    result.Add(new TankEnemy(new Point(50, 50), TankDirection.Down));
+			result.Add(new TankEnemy(new Point(300, 50), TankDirection.Down));
+			result.Add(new TankEnemy(new Point(600, 50), TankDirection.Down));
 			return result;
         }
 
