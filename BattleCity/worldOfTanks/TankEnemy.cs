@@ -26,9 +26,9 @@ namespace BattleCity.worldOfTanks
 			Size = Image.Size;
 		}
 
-        public override void Control(object sender, EventArgs args, List<IGameObject> gameObjects)
+        public override void Control(object sender, EventArgs args)
         {
-            var wayChecked = CheckWay(Direction, gameObjects);
+            var wayChecked = CheckWay();
             if (wayChecked)
                 Move();
             else

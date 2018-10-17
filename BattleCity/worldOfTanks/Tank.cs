@@ -10,32 +10,31 @@ namespace BattleCity.worldOfTanks
 {
     public abstract class Tank : IGameObject
     {
-        protected const int Step = 5;
-
+        public int Step = 5;
         protected static string pathImage = Application.StartupPath + @"\image";
 
         protected Point location;
         public  Dictionary<TankDirection, Image> dictDirection;
 
-        protected TankDirection Direction { get; set; }
+        public TankDirection Direction { get; set; }
         public Size Size { get; set; }
         public Point Location { get => location; set => location = value; }
         public Image Image
         {
             get { return dictDirection[Direction]; }
         }
-
-        protected bool CheckWay(TankDirection direction, List<IGameObject> gameObjects)
+        public Gun Gun { get; set; }
+        private bool Check(IEnumerable<IGameObject> listGameObjects)
         {
-            switch (direction)
+            switch (Direction)
             {
                 case TankDirection.Left:
                     {
                         var topLeftPoint = new Point(Location.X - Step, Location.Y); // танк левый верхний угол 
                         var bottomLeftPoint = new Point(Location.X - Step, Location.Y + Size.Height); // танк левый нижний угол 
-                        foreach (var obj in gameObjects)
+                        foreach (var obj in listGameObjects)
                         {
-							if (this.Equals(obj)) continue;
+                            if (this.Equals(obj)) continue;
                             var top = topLeftPoint.Y >= obj.Location.Y + obj.Size.Height;
                             var bottom = bottomLeftPoint.Y <= obj.Location.Y;
                             var left = topLeftPoint.X >= obj.Location.X + obj.Size.Width;
@@ -49,7 +48,7 @@ namespace BattleCity.worldOfTanks
                     {
                         var topLeftPoint = new Point(Location.X, Location.Y - Step);
                         var topRightPoint = new Point(Location.X + Size.Width, Location.Y - Step);
-                        foreach (var obj in gameObjects)
+                        foreach (var obj in listGameObjects)
                         {
                             if (this.Equals(obj)) continue;
                             var left = topLeftPoint.X >= obj.Location.X + obj.Size.Width;
@@ -65,7 +64,7 @@ namespace BattleCity.worldOfTanks
                     {
                         var topRightPoint = new Point(Location.X + Size.Width + Step, Location.Y);
                         var bottomRightPoint = new Point(Location.X + Size.Width + Step, Location.Y + Size.Height);
-                        foreach (var obj in gameObjects)
+                        foreach (var obj in listGameObjects)
                         {
                             if (this.Equals(obj)) continue;
                             var top = topRightPoint.Y >= obj.Location.Y + obj.Size.Height;
@@ -81,7 +80,7 @@ namespace BattleCity.worldOfTanks
                     {
                         var bottomLeftPoint = new Point(Location.X, Location.Y + Step + Size.Height);
                         var bottomRightPoint = new Point(Location.X + Size.Width, Location.Y + Step + Size.Height);
-                        foreach (var obj in gameObjects)
+                        foreach (var obj in listGameObjects)
                         {
                             if (this.Equals(obj)) continue;
                             var left = bottomLeftPoint.X >= obj.Location.X + obj.Size.Width;
@@ -97,8 +96,13 @@ namespace BattleCity.worldOfTanks
                     throw new ArgumentException("Не корректный ввод");
             }
         }
+        protected bool CheckWay()
+        {
+            return Check(Map.wall) && Check(Map.tankEnemies) && Check(Map.TanksMain);
+
+        }
 
         protected abstract void Move();
-        public abstract void Control(object sender, EventArgs args, List<IGameObject> gameObjects);
+        public abstract void Control(object sender, EventArgs args);
     }
 }

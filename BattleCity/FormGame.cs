@@ -16,22 +16,30 @@ namespace BattleCity
         PictureBox TankMajor { get; set; }
         List<PictureBox> PictureWalls { get; set; }
         List<PictureBox> PuctureEnemies { get; set; }
+        PictureBox[] PictureBullets = new PictureBox[100];
         Timer Timer { get; set; }
-		
+
+        PictureBox box;
 
 		public FormGame(Map map)
         {
             Map = map; // Обязательно перед любой доп. инициализацией
             InitializeComponent(); // что-то там создает
             ClientSize = Map.Size; // размер окна
-            TankMajor = CreateTankMain(); // Создает основной крутой танк
+            TankMajor = CreateTanksMain(); // Создает основной крутой танк
             PictureWalls = CreateBoxForWalls(); // Создает боксы для стен
             PuctureEnemies = CreateBoxForEnemies(); // враги
+
+
+
+
+            for (int i = 0; i < PictureBullets.Length; i++)
+                PictureBullets[i] = new PictureBox() { Parent = this };
             // событие при нажатии на кнопки
             KeyDown += (sender, args) => {
                 Map.Control(sender, args);
-                TankMajor.Image = Map.tankMain.Image;
-                TankMajor.Location = Map.tankMain.Location;
+                TankMajor.Image = Map.TanksMain[0].Image;
+                TankMajor.Location = Map.TanksMain[0].Location;
             };
 
             Timer = new Timer();
@@ -39,23 +47,30 @@ namespace BattleCity
             Timer.Tick += (sender, args) =>
             {
                 Map.ControlEventEnemyTanks(sender, args);
+                Map.UpdateBullets();
                 for (int i = 0; i < PuctureEnemies.Count; i++)
                 {
-                    PuctureEnemies[i].Size = Map.tankEmenies[i].Size;
-                    PuctureEnemies[i].Image = Map.tankEmenies[i].Image;
-                    PuctureEnemies[i].Location = Map.tankEmenies[i].Location;
+                    PuctureEnemies[i].Size = Map.tankEnemies[i].Size;
+                    PuctureEnemies[i].Image = Map.tankEnemies[i].Image;
+                    PuctureEnemies[i].Location = Map.tankEnemies[i].Location;
+                }
+                for (int i = 0; i < Map.TanksMain[0].Gun.Bullets.Count; i++)
+                {
+                    PictureBullets[i].Size = Map.TanksMain[0].Gun.Bullets[i].Size;
+                    PictureBullets[i].Image = Map.TanksMain[0].Gun.Bullets[i].Image;
+                    PictureBullets[i].Location = Map.TanksMain[0].Gun.Bullets[i].Location;
                 }
             };
             Timer.Start();
         }
 
-        PictureBox CreateTankMain()
+        PictureBox CreateTanksMain()
         {
             return new PictureBox
             {
-                Size = Map.tankMain.Size,
-                Image = Map.tankMain.Image,
-                Location = Map.tankMain.Location,
+                Size = Map.TanksMain[0].Size,
+                Image = Map.TanksMain[0].Image,
+                Location = Map.TanksMain[0].Location,
                 Parent = this
             };
         }
@@ -84,6 +99,11 @@ namespace BattleCity
                     Parent = this
                 });
             return result;
+        }
+
+        private void FormGame_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

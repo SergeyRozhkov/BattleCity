@@ -53,6 +53,7 @@
       <DependentUpon>FormGame.cs</DependentUpon>
     </Compile>
     <Compile Include="worldOfTanks\Bullet.cs" />
+    <Compile Include="worldOfTanks\Gun.cs" />
     <Compile Include="worldOfTanks\IGameObject.cs" />
     <Compile Include="worldOfTanks\ITank.cs" />
     <Compile Include="worldOfTanks\Map.cs" />
@@ -103,13 +104,13 @@
     <Content Include="image\TankEnemy\TankRight.png" />
     <Content Include="image\TankEnemy\TankUp.png" />
     <Content Include="image\Bullet\BulletUp.png" />
-    <Content Include="image\TankMain\TankDown.png" />
-    <Content Include="image\TankMain\TankLeft.jpg" />
-    <Content Include="image\TankMain\TankLeft.png" />
-    <Content Include="image\TankMain\TankRight.jpg" />
-    <Content Include="image\TankMain\TankRight.png" />
-    <Content Include="image\TankMain\TankUp.jpg" />
-    <Content Include="image\TankMain\TankUp.png" />
+    <Content Include="image\TanksMain\TankDown.png" />
+    <Content Include="image\TanksMain\TankLeft.jpg" />
+    <Content Include="image\TanksMain\TankLeft.png" />
+    <Content Include="image\TanksMain\TankRight.jpg" />
+    <Content Include="image\TanksMain\TankRight.png" />
+    <Content Include="image\TanksMain\TankUp.jpg" />
+    <Content Include="image\TanksMain\TankUp.png" />
     <Content Include="image\Wall\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

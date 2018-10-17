@@ -14,23 +14,35 @@ namespace BattleCity.worldOfTanks
 		{
 			dictDirection = new Dictionary<TankDirection, Image>
 			{
-				[TankDirection.Up] = Image.FromFile(pathImage + @"\TankMain\TankUp.png"),
-				[TankDirection.Right] = Image.FromFile(pathImage + @"\TankMain\TankRight.png"),
-				[TankDirection.Down] = Image.FromFile(pathImage + @"\TankMain\TankDown.png"),
-				[TankDirection.Left] = Image.FromFile(pathImage + @"\TankMain\TankLeft.png")
+				[TankDirection.Up] = Image.FromFile(pathImage + @"\TanksMain\TankUp.png"),
+				[TankDirection.Right] = Image.FromFile(pathImage + @"\TanksMain\TankRight.png"),
+				[TankDirection.Down] = Image.FromFile(pathImage + @"\TanksMain\TankDown.png"),
+				[TankDirection.Left] = Image.FromFile(pathImage + @"\TanksMain\TankLeft.png")
 			};
 			Direction = direction;
 			Location = location;
 			Size = Image.Size;
+            Gun = new Gun();
 		}
-		public override void Control(object sender, EventArgs a, List<IGameObject> gameObjects)
+		public override void Control(object sender, EventArgs a)
         {
             KeyEventArgs args = a as KeyEventArgs;
-            if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
-            var wayChecked = CheckWay((TankDirection)args.KeyValue, gameObjects);
-            Direction = (TankDirection)args.KeyValue;
-            if (wayChecked)
-                Move();
+            if (!(37 <= args.KeyValue && args.KeyValue <= 40 || args.KeyValue == 32)) return; // если не стрелки, то ничего не меняем
+            if (37 <= args.KeyValue && args.KeyValue <= 40)
+            {
+                Direction = (TankDirection)args.KeyValue;
+                if (CheckWay())
+                    Move();
+            }
+            if (args.KeyValue == 32)
+            {
+                if (Gun.CheckShot())
+                {
+                    Gun.Shot(this);
+                }
+            }
+
+
         }
         protected override void Move()
         {

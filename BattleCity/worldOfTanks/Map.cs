@@ -11,18 +11,21 @@ namespace BattleCity.worldOfTanks
     
     public class Map
     {
+        public static Bullet Bullet = new Bullet(new TankMain(new Point(300, 500), TankDirection.Up)) { Location = new Point(250,250)};
+        public static List<Tank> TanksMain { get; private set; }
+        public static List<Tank> tankEnemies;
+        public static List<IWall> wall;
+        public static List<IEnumerable<IGameObject>> gameObject;
+
         public Size Size { get; private set; }
-        public Tank tankMain { get; private set; }
-        public List<Tank> tankEnemies;
-        public List<IWall> wall;
-        private List<IGameObject> listGameObjects;
+
         public Map()
         {
-            Size = new Size(700, 600);											// Задание размера карты
-			tankMain = new TankMain(new Point(300, 500), TankDirection.Up);		// Создание Main танка
+            Size = new Size(700, 600);                                          // Задание размера карты
+            TanksMain = new List<Tank> { new TankMain(new Point(300, 500), TankDirection.Up) };	// Создание Main танка
             wall = CreateWall();								// Создание стен и занесение их в лист wall
-			tankEnemies = CreateEnemies();						// Создание врагов и занесение их в лист tankEnemies
-            listGameObjects = CreatelistGameObjects();			// Создание листа всех объектов
+			tankEnemies = CreateEnemies();                      // Создание врагов и занесение их в лист tankEnemies
+
         }
         public Map(Size size) : base()
         {
@@ -33,16 +36,14 @@ namespace BattleCity.worldOfTanks
         public void ControlEventEnemyTanks(object sender, EventArgs args)
         {
             foreach (var tank in tankEnemies)
-                tank.Control(sender, args, listGameObjects);
+                tank.Control(sender, args);
         }
 
 		// Передает контроль Main танку
         public void Control(object sender, KeyEventArgs args)
         {
-            tankMain.Control(sender, args, listGameObjects);
+            TanksMain[0].Control(sender, args);
         }
-
-		// создание стен
 		List<IWall> CreateWall()
 		{
 			var result = new List<IWall>();
@@ -61,27 +62,25 @@ namespace BattleCity.worldOfTanks
                 result.Add(new WallBrick(new Point(x, y)));
             return result;
 		}
-        
-		// создание врагов
         List<Tank> CreateEnemies()
         {
             var result = new List<Tank>();
-			for (int i = 1; i < 13; i++)
-				result.Add(new TankEnemy(new Point(i*50, 50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Point(100, 50), TankDirection.Down));
-			//result.Add(new TankEnemy(new Point(600, 50), TankDirection.Down));
-			return result;
+            //for (int i = 1; i < 13; i++)
+            //    result.Add(new TankEnemy(new Point(i * 50, 50), TankDirection.Down));
+            //result.Add(new TankEnemy(new Point(100, 50), TankDirection.Down));
+            //result.Add(new TankEnemy(new Point(600, 50), TankDirection.Down));
+            return result;
         }
-
+        public void UpdateBullets()
+        {
+            foreach (var tank in TanksMain)
+                tank.Gun.MoveAllBullets();
+            foreach (var tank in tankEnemies)
+                tank.Gun.MoveAllBullets();
+        }
 		// создание списка всех объектов
-		public List<IGameObject> CreatelistGameObjects()
+		public void CreatelistGameObjects()
 		{
-			var result = new List<IGameObject>() { tankMain };
-           foreach (var item in tankEnemies)
-               result.Add(item);
-            foreach (var item in wall)
-				result.Add(item);
-			return result;
 		}
 
 	}
