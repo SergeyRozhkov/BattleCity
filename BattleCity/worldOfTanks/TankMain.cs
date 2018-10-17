@@ -10,20 +10,20 @@ namespace BattleCity.worldOfTanks
 {
     public class TankMain : Tank
     {
-        public TankMain()
-        {
-            Direction = TankDirection.Up;
-            Location = new Point(100, 100);
-            Size = new Size(50, 50);
-            dictDirection = new Dictionary<TankDirection, Image>
-            {
-                [TankDirection.Up] = Image.FromFile(pathImage + @"\TankMain\TankUp.png"),
-                [TankDirection.Right] = Image.FromFile(pathImage + @"\TankMain\TankRight.png"),
-                [TankDirection.Down] = Image.FromFile(pathImage + @"\TankMain\TankDown.png"),
-                [TankDirection.Left] = Image.FromFile(pathImage + @"\TankMain\TankLeft.png")
-            };
-        }
-        public override void Control(object sender, EventArgs a, List<IGameObject> gameObjects)
+		public TankMain(Point location, TankDirection direction)
+		{
+			dictDirection = new Dictionary<TankDirection, Image>
+			{
+				[TankDirection.Up] = Image.FromFile(pathImage + @"\TankMain\TankUp.png"),
+				[TankDirection.Right] = Image.FromFile(pathImage + @"\TankMain\TankRight.png"),
+				[TankDirection.Down] = Image.FromFile(pathImage + @"\TankMain\TankDown.png"),
+				[TankDirection.Left] = Image.FromFile(pathImage + @"\TankMain\TankLeft.png")
+			};
+			Direction = direction;
+			Location = location;
+			Size = Image.Size;
+		}
+		public override void Control(object sender, EventArgs a, List<IGameObject> gameObjects)
         {
             KeyEventArgs args = a as KeyEventArgs;
             if (!(37 <= args.KeyValue && args.KeyValue <= 40)) return; // если не стрелки, то ничего не меняем
